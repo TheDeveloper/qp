@@ -129,6 +129,18 @@ Job.prototype.set = function(key, val, r, cb){
   return this;
 };
 
+Job.prototype.get = function(key, r, cb){
+
+  if (!this._saved || this.queue.getOption('noInfo')) {
+    if (cb) cb();
+    return this;
+  }
+
+  (r || this.redis).hget('qp:job:' + this.queue.name + '.' + this.id, key, cb || f);
+
+  return this;
+};
+
 Job.prototype.setState = function(state, r, cb) {
   if (!r) r = this.redis;
 
