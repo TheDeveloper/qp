@@ -322,7 +322,7 @@ Job.prototype.remove = function(cb) {
   var r = this.redis.multi();
   this._remove(r);
 
-  self._exec(r, cb);
+  this._exec(r, cb);
 };
 
 Job.prototype._remove = function(r) {
